@@ -1,0 +1,66 @@
+[
+  {
+    "projectId": 1,
+    "status": "Active",
+    "due": "Ends Friday",
+    "title": "Foundry Engine",
+    "scope": "System",
+    "description": "Refactor canvas rendering memory leak on font upload"
+  },
+  {
+    "projectId": 2,
+    "status": "Sprint 12",
+    "due": "Ends Today",
+    "title": "Marketing site",
+    "scope": "Work",
+    "description": "Update specimen preview Mobile responsive grid"
+  },
+  {
+    "projectId": 3,
+    "status": "Backlog",
+    "due": "Ends Tomorrow",
+    "title": "User analytics",
+    "scope": "Internal",
+    "description": "Heatmap data collection Conversion funnel v2"
+  },
+  {
+    "projectId": 4,
+    "status": "In Review",
+    "due": "Ends Monday",
+    "title": "Auth Gateway",
+    "scope": "Backend",
+    "description": "Migrate session tokens to rotating refresh token flow"
+  },
+  {
+    "projectId": 5,
+    "status": "Blocked",
+    "due": "Ends Wednesday",
+    "title": "Order Sync Service",
+    "scope": "Integration",
+    "description": "Reconcile duplicate order events from webhook retries"
+  },
+  {
+    "projectId": 6,
+    "status": "Active",
+    "due": "Ends Thursday",
+    "title": "Dashboard UI Revamp",
+    "scope": "Frontend",
+    "description": "Replace legacy chart library with new theming support"
+  },
+  {
+    "projectId": 7,
+    "status": "Completed",
+    "due": "Ended Tuesday",
+    "title": "Notification Pipeline",
+    "scope": "Backend",
+    "description": "Add retry with exponential backoff for failed push notifications"
+  },
+  {
+    "projectId": 8,
+    "status": "Active",
+    "due": "Ends Sunday",
+    "title": "Inventory Search",
+    "scope": "System",
+    "description": "Add fuzzy matching to product search index"
+  }
+]

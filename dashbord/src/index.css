@@ -1,0 +1,258 @@
+@import url(./App.css);
+
+.ProfileImage {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.userContainer {
+  display: flex;
+  width: 100px;
+  height: 40px;
+  gap: 10px;
+  border: 1px solid #959a973d;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  align-items: center;
+}
+
+nav {
+  display: flex;
+  text-decoration: none;
+  gap: 25px;
+  font-size: 12px;
+  color: var(--color-secondry);
+  border: 1px solid #959a973d;
+  width: 250px;
+  padding: 18px;
+  justify-content: space-around;
+  height: 30px;
+  align-items: center;
+  border-radius: 30px;
+  cursor: pointer;
+  color: whitesmoke;
+}
+
+nav a {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  width: 70px;
+  height: 20px;
+  padding: 5px;
+  transition:
+    transform 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
+}
+
+nav a:hover {
+  background-color: #8da798b9;
+  transform: translateX(2px);
+  color: white;
+}
+
+.body {
+  margin-left: 8rem;
+  margin-right: 8rem;
+}
+
+.bodyHeader {
+  color: whitesmoke;
+  line-height: 5px;
+}
+
+p {
+  font-size: 14px;
+  color: var(--color-secondry);
+}
+
+.issuesHeading {
+  color: whitesmoke;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.issuesTable {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #959a973d;
+  border-radius: 50px;
+  padding: 12px;
+  width: 100%;
+  height: 400px;
+  color: var(--color-secondry);
+  padding: 18px;
+  overflow-x: scroll;
+  scrollbar-width: thin;
+}
+
+.issueTableHeader,
+.issueCard-light {
+  display: flex;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 16px;
+  height: 30px;
+  border-bottom: 1px solid #959a973d;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.noDataRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 25px;
+}
+
+.title {
+  width: 250px;
+  background-color: transparent;
+}
+
+img {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.taskCardPriority,
+.taskCardProject,
+.taskCardAssignee,
+.menu {
+  background-color: transparent;
+  display: flex;
+  width: 60px;
+  align-items: center;
+  justify-content: center;
+}
+
+.issueCard-light {
+  background-color: #2f3933;
+  height: 50px;
+  align-items: center;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.dot {
+  background-color: #39463eaf;
+  border-radius: 50%;
+  display: flex;
+  width: 10px;
+  height: 10px;
+}
+
+.shapes {
+  display: flex;
+  gap: 8px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 20px;
+  color: whitesmoke;
+  background: transparent;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+  width: 300px;
+  height: 300px;
+  border: 1px solid #535c5783;
+  border-radius: 50px;
+  cursor: pointer;
+  transform:
+    0.3s ease-in-out,
+    translate() 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 1px 1px 4px #535c5783;
+  backdrop-filter: blur(20px);
+}
+
+.projects {
+  margin-top: 60px;
+  margin-bottom: 30px;
+  padding: 20px;
+  display: flex;
+  gap: 80px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.cardTop h3 {
+  color: whitesmoke;
+}
+
+.cardTop {
+  border-bottom: 1px solid #535c5783;
+  background-color: transparent;
+  height: 70%;
+}
+
+.cardBottom {
+  font-size: 14px;
+  padding: 20px;
+  color: var(--color-secondry);
+}
+
+.info {
+  color: var(--color-secondry);
+  font-size: 12px;
+  text-align: right;
+}
+
+.indicator {
+  display: flex;
+  background-color: var(--color-badge);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  gap: 10px;
+  min-width: 105px;
+  width: fit-content;
+  height: 30px;
+  border-radius: 50px;
+  border: 1px solid #535c5783;
+}
+
+.createButton {
+  display: flex;
+  width: 90px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #535c5783;
+  cursor: pointer;
+  color: whitesmoke;
+  border-radius: 5px;
+}
