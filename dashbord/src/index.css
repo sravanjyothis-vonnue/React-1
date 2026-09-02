@@ -253,6 +253,124 @@ img {
   align-items: center;
   border: 1px solid #535c5783;
   cursor: pointer;
-  color: whitesmoke;
+  background-color: whitesmoke;
+  color: var(--color-primary);
+  font-weight: 500;
   border-radius: 5px;
+}
+
+.createButton:hover {
+  animation: 0.3s jumb ease-in-out;
+}
+
+.searchBar {
+  display: flex;
+  width: 250px;
+  height: 40px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 50px;
+  color: rgba(245, 245, 245, 0.418);
+  border: 1px solid #535c5783;
+  background-color: transparent;
+}
+
+.searchBar:focus {
+  color: whitesmoke;
+  font-family: var(--font-primary);
+  font-weight: 500;
+}
+
+.filterContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 600px;
+  height: 45px;
+  gap: 15px;
+  border: 1px solid #535c5783;
+  border-radius: 5px;
+  padding: 30px;
+  font-size: 16px;
+  color: whitesmoke;
+}
+
+#status,
+#priority,
+.sort {
+  border-radius: 5px;
+  display: flex;
+  width: 90px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: whitesmoke;
+  border: 1px solid #535c5783;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.addForm {
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+}
+
+.formInput {
+  width: 220px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 1px solid #535c5783;
+  padding: 10px;
+  color: var(--color-secondry);
+  margin-left: 30px;
+}
+
+.formInput:focus {
+  color: whitesmoke;
+}
+
+.formButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-badge);
+  border: 1px solid #535c5783;
+  border-radius: 5px;
+  cursor: pointer;
+  color: whitesmoke;
+  width: 180px;
+  height: 30px;
+  padding: 10px;
+  margin-top: 30px;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 20px;
+}
+
+#inputForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sort:hover {
+  background-color: whitesmoke;
+  color: var(--color-primary);
+}
+
+@keyframes jumb {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
