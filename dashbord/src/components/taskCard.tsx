@@ -1,21 +1,14 @@
 import menu from "../assets/menu-dots-svgrepo-com.svg";
 
 type taskData = {
-  key: number;
+  key: string;
   title: string;
   project: number;
   priority: string;
   assignee: string;
-  onClick: () => void;
 };
 
-export function TaskCard({
-  title,
-  project,
-  priority,
-  assignee,
-  onClick,
-}: taskData) {
+export function TaskCard({ title, project, priority, assignee }: taskData) {
   return (
     <tr className="issueCard-light">
       <td className="title">{title}</td>
@@ -23,7 +16,7 @@ export function TaskCard({
       <td className="taskCardPriority">{priority}</td>
       <td className="taskCardAssignee">{assignee}</td>
       <td className="menu">
-        <img src={menu} alt="menu" width={16} height={16} onClick={onClick} />
+        <img src={menu} alt="menu" width={16} height={16} />
       </td>
     </tr>
   );
