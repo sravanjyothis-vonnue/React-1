@@ -1,10 +1,9 @@
 import { DashbordCard } from "./dashbordCard";
 import data from "../data/overview.json";
-import leaveData from "../data/leaveData.json";
 import { useId } from "react";
-export function Dashbord() {
+export function Dashbord(leaveData: any) {
   let totalPending = 0;
-  leaveData.forEach((leave) => {
+  leaveData.forEach((leave: any) => {
     if (leave.status == "Pending") {
       totalPending += leave.due;
     }

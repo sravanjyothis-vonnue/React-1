@@ -1,10 +1,7 @@
 import { LeaveCard } from "./leaveCard";
 import { LeaveForm } from "./leaveForm";
-import leaveData from "../data/leaveData.json";
-import { useState } from "react";
 
-export function LeaveSchema() {
-  const [leavestatus, setLeavesStatus] = useState(leaveData);
+export function LeaveSchema({ status, setStatus }: any) {
   return (
     <div className="leaveBody">
       <div className="leaveContainer">
@@ -17,7 +14,7 @@ export function LeaveSchema() {
             <div className="status">STATUS</div>
           </div>
 
-          {leavestatus.map((leaveData, i) => {
+          {status.map((leaveData: any, i: any) => {
             return (
               <LeaveCard
                 key={i}
@@ -30,7 +27,7 @@ export function LeaveSchema() {
           })}
         </div>
       </div>
-      <LeaveForm setLeave={setLeavesStatus} />
+      <LeaveForm setLeave={setStatus} />
     </div>
   );
 }
