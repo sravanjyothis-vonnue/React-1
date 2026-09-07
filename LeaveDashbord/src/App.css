@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Aldrich&family=Atomic+Age&family=Bebas+Neue&family=Black+Ops+One&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=SN+Pro:ital,wght@0,200..900;1,200..900&family=Stack+Sans+Headline:wght@200..700&display=swap");
+
+body {
+  background-color: #0e0e0e;
+  font-family: Inter;
+  color: white;
+  padding: 0;
+  margin: 0;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 20px;
+  padding-bottom: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.596);
+  height: 4rem;
+}
+
+.heading {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 300px;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.quarter {
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  column-gap: 0px;
+  row-gap: 0;
+}
+
+.availableCard,
+.availableCardMarked {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 438px;
+  height: 200px;
+  border: 1px solid rgba(128, 128, 128, 0.596);
+}
+
+.cardHeading {
+  font-size: 10px;
+  font-weight: 500;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 24px;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.daysLeft {
+  font-size: 100px;
+  font-weight: 600;
+}
+
+.description {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: -15px;
+  margin-top: -14px;
+}
+
+.leaveBody {
+  display: flex;
+  height: 700px;
+  width: 100%;
+  border: 1px solid rgba(128, 128, 128, 0.596);
+}
+
+.leaveContainer {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  border: 1px solid rgba(128, 128, 128, 0.596);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(128, 128, 128, 0.596);
+  border-left: none;
+  border-top: none;
+  padding: 20px;
+  height: 600px;
+  gap: 20px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 800px;
+}
+
+.submitHeader {
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  height: 40px;
+}
+
+button {
+  width: 500px;
+  height: 60px;
+  background-color: white;
+  color: black;
+  border: 1px solid rgba(128, 128, 128, 0.596);
+  font-weight: 700;
+  margin-left: 4%;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+input,
+select {
+  margin-left: 6%;
+  padding-left: 10px;
+  width: 400px;
+  height: 40px;
+  background-color: transparent;
+  border: 1px solid rgba(128, 128, 128, 0.596);
+  color: white;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+}

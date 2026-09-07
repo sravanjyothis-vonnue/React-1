@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Annual Leave",
+    "period": "OCT 19 - OCT 22",
+    "due": 3,
+    "status": "Pending"
+  },
+  {
+    "title": "Medical Leave",
+    "period": "OCT 26 - NOV 1",
+    "due": 6,
+    "status": "Approved"
+  },
+  {
+    "title": "Annual Leave",
+    "period": "NOV 2 - NOV 8",
+    "due": 6,
+    "status": "Rejected"
+  },
+  {
+    "title": "Personal Time",
+    "period": "NOV 9 - NOV 15",
+    "due": 6,
+    "status": "Approved"
+  }
+]

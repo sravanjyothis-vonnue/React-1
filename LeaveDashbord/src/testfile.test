@@ -1,0 +1,20 @@
+import {repository} from "./ticket.repository";
+import {deleteTicket} from "./deleteTicket"
+jest.mock(deleteTicket);
+
+describe("deleteTicket from db",() => {
+    afterall(() => {
+        jest.clearallmock();
+    })
+
+    it('test delete happycase',() => {
+        (repository.findTicket as jest.Mock).mockResolvedValue({})
+        (repository.deleteTicket as jest.Mock).mockResolvedValue(true)
+        expect(deleteTicket(id)).toEqual({success:true});
+    })
+    it('test delete unhappycase',() => {
+        (repository.findTicket as jest.Mock).mockResolvedValue({})
+        (repository.deleteTicket as jest.Mock).mockImplimentation(() => {throw new Error('test')})
+        expect(deleteTicket(id)).toThrow();
+    })
+})

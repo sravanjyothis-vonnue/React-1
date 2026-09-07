@@ -1,0 +1,67 @@
+.requestHistory {
+  display: flex;
+  font-size: 12px;
+  font-weight: 700;
+  height: 40px;
+  align-items: flex-end;
+  padding: 10px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.596);
+}
+
+.leaveTable {
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.leaveStatsTable,
+.leavecard {
+  display: flex;
+  color: darkgray;
+  height: 40px;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.596);
+}
+
+.title,
+.period,
+.due,
+.status {
+  width: 120px;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.leavecard {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.statusCircle {
+  display: flex;
+  width: 5px;
+  height: 5px;
+  background-color: yellow;
+  border-radius: 50%;
+}
+
+.badgeContainer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.availableCardMarked {
+  background-color: orangered;
+  color: black;
+}
+
+.error {
+  color: red;
+  font-size: 10px;
+  font-weight: 500;
+}
