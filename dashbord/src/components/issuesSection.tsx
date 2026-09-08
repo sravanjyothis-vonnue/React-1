@@ -1,5 +1,5 @@
 import { useState } from "react";
-import issues from "../data/taskData.json";
+import { useIssues } from "../constext/issueContext";
 import { Filter } from "./filter";
 import { TaskCard } from "./taskCard";
 import { ModalOverlay } from "./modal";
@@ -9,11 +9,12 @@ function handleClick({ setOpen }: any) {
 }
 
 export function IssueSection({ selectedIssue }: any) {
+  const { issue } = useIssues();
   const [status, setStatus] = useState(null);
   const [priority, setPriority] = useState(null);
   const [sort, setSort] = useState("asc");
   const [open, setOpen] = useState(false);
-  const [submit, onSubmit] = useState(issues);
+  const [submit, onSubmit] = useState(issue);
 
   const sorted =
     sort == "asc"

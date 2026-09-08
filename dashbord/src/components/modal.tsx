@@ -5,6 +5,7 @@ import { toast } from "sonner";
 function handleSubmit(formData: any, setOpen: any, onSubmit: any) {
   let issueData = {
     projectId: Number(formData.get("projectId")),
+    issueId: Math.floor(Math.random() * 100),
     title: formData.get("issue"),
     due: new Date(formData.get("due")),
     assignee: formData.get("assignee"),

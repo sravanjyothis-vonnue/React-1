@@ -1,4 +1,5 @@
 import menu from "../assets/menu-dots-svgrepo-com.svg";
+import { useNavigate } from "react-router-dom";
 
 type taskData = {
   key: string;
@@ -9,10 +10,6 @@ type taskData = {
   issueId: Number;
 };
 
-function handleClick(project: Number) {
-  window.location.pathname = `/dashbord/${project}`;
-}
-
 export function TaskCard({
   title,
   project,
@@ -20,6 +17,10 @@ export function TaskCard({
   assignee,
   issueId,
 }: taskData) {
+  const navigate = useNavigate();
+  function handleClick(project: Number) {
+    navigate(`/dashbord/${project}`);
+  }
   return (
     <tr className="issueCard-light">
       <td className="title">{title}</td>
