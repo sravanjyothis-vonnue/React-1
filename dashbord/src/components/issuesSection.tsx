@@ -85,6 +85,7 @@ export function IssueSection({ selectedIssue }: any) {
                     project={issue.projectId}
                     priority={issue.priority as string}
                     assignee={issue.assignee}
+                    issueId={issue.issueId}
                   />
                 );
               })

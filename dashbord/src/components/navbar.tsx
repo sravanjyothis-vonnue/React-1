@@ -2,9 +2,9 @@ export function Navbar() {
   return (
     <>
       <nav>
-        <a>Overview</a>
-        <a>Team</a>
-        <a>Archive</a>
+        <a href="/dashbord">Overview</a>
+        <a href="/team">Team</a>
+        <a href="/">Log-out</a>
       </nav>
     </>
   );

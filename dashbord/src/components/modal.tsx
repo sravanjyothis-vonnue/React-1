@@ -17,7 +17,7 @@ function handleSubmit(formData: any, setOpen: any, onSubmit: any) {
     const messages = result.error.issues
       .map((issues) => issues.message)
       .join("\n");
-    toast.error(messages, { duration: 3000 });
+    toast.error(messages, { duration: 10000 });
     throw new Error("Validation failed");
   }
 
@@ -82,13 +82,11 @@ export function ModalOverlay({ open, setOpen, onSubmit }: any) {
             <label className="formLabel" htmlFor="priority1">
               Priority :
             </label>
-            <input
-              className="formInput"
-              type="text"
-              name="priority"
-              id="priority1"
-              placeholder="Issue Priority"
-            />
+            <select id="priority1" name="priority">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
             <label className="formLabel" htmlFor="priority1">
               Project Id :
             </label>

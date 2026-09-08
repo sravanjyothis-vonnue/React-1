@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Aldrich&family=Atomic+Age&family=Bebas+Neue&family=Black+Ops+One&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=SN+Pro:ital,wght@0,200..900;1,200..900&family=Stack+Sans+Headline:wght@200..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Aldrich&family=Atomic+Age&family=Bebas+Neue&family=Black+Ops+One&family=Caacupe+One&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=SN+Pro:ital,wght@0,200..900;1,200..900&family=Stack+Sans+Headline:wght@200..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Aldrich&family=Atomic+Age&family=Bebas+Neue&family=Black+Ops+One&family=Caacupe+One&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=SN+Pro:ital,wght@0,200..900;1,200..900&family=Stack+Sans+Headline:wght@200..700&family=Vina+Sans&display=swap");
 
 :root {
   --color-primary: #2f3933;
@@ -9,9 +11,317 @@
 
 * {
   box-sizing: border-box;
-
   font-family: var(--font-primary);
 }
 body {
   background-color: #1f2321;
+}
+
+.image {
+  display: flex;
+  width: 300px;
+  height: 450px;
+  overflow: hidden;
+  justify-content: center;
+  border-radius: 50px;
+}
+
+.cardConttainer {
+  display: flex;
+  gap: 10px;
+  border-radius: 50px;
+  border: 1px solid #959a973d;
+  padding: 20px;
+  width: 700px;
+  height: 500px;
+  margin-bottom: 30px;
+  color: whitesmoke;
+  justify-content: space-between;
+}
+
+.teamBody {
+  margin-top: 30px;
+  padding: 30px;
+  padding-left: 80px;
+  display: grid;
+  gap: 50px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: 600;
+  width: 400px;
+  gap: 10px;
+  justify-content: space-evenly;
+  text-align: justify;
+}
+
+.fieldName {
+  color: darkgray;
+  font-size: 24px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.cardConttainer:hover {
+  box-shadow: 0px 0px 2px 1px #8da798b9;
+  transform: translateY(-2px);
+  backdrop-filter: blur(20px);
+}
+
+.greenText {
+  color: darkolivegreen;
+}
+
+.brownText {
+  color: burlywood;
+}
+
+.loginBody {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 60vh;
+}
+
+#userName,
+#password {
+  color: rgba(255, 255, 255, 0.575);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.loginFormContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 400px;
+  width: 300px;
+  padding: 20px;
+  justify-content: center;
+  border-radius: 5px;
+  border: 2px solid whitesmoke;
+}
+
+#loginForm:hover {
+  backdrop-filter: blur(2px);
+  box-shadow: 0px 0px 1px 1px whitesmoke;
+}
+
+.loginText {
+  font-family: "Vina Sans";
+  font-size: 80px;
+  font-weight: 600;
+  color: whitesmoke;
+  margin-left: 60px;
+  padding: 20px;
+}
+
+.loginBackground {
+  z-index: 0;
+  height: 100vh;
+  background-color: var(--color-primary);
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(245, 245, 245, 0.11) 0,
+      rgba(245, 245, 245, 0.123) 1px,
+      transparent 1px,
+      transparent 20px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(245, 245, 245, 0.199) 0,
+      rgba(245, 245, 245, 0.137) 1px,
+      transparent 1px,
+      transparent 20px
+    );
+}
+
+.teamHeader,
+.notFoundText {
+  font-family: "Vina Sans";
+  font-size: 140px;
+  font-weight: 600;
+  color: whitesmoke;
+  margin-left: 60px;
+  padding: 20px;
+}
+
+.issueTitle {
+  font-family: "Vina Sans";
+  font-size: 80px;
+  font-weight: 600;
+  color: whitesmoke;
+  margin-left: 60px;
+  padding: 20px;
+}
+
+.notFoundBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.profileImage {
+  display: flex;
+  width: 400px;
+  height: 400px;
+  border-radius: 50% 0 0 50%;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.profileContainer {
+  display: flex;
+  width: 60vw;
+  margin-left: 10vw;
+  padding-left: 40px;
+  justify-content: space-between;
+  align-items: center;
+  color: #1f2321;
+  background-color: rgba(245, 245, 245, 0.356);
+  border-radius: 5px;
+  height: 600px;
+  gap: 20px;
+}
+
+.profileContent {
+  color: whitesmoke;
+}
+
+.nameContainer {
+  font-family: "Vina Sans";
+  font-size: 40px;
+}
+
+.userAbout {
+  width: 600px;
+}
+
+.user {
+  font-size: 40px;
+  padding-left: 45px;
+  color: #6d8b7e;
+  font-width: 900;
+}
+
+.profileBody {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  padding: 50px;
+}
+
+.personalDetails {
+  color: whitesmoke;
+  display: flex;
+  width: 90vw;
+  height: 80px;
+  justify-content: space-between;
+  padding-left: 60px;
+}
+
+.roleContainer,
+#locationContainer,
+.phoneContainer,
+.emailContainer {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  gap: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+  background-color: whitesmoke;
+  color: #1f2321;
+  font-weight: 600;
+  padding: 10px;
+}
+
+.email,
+.phone,
+.role,
+.location {
+  color: darkgray;
+}
+
+.userAbout {
+  font-size: 20px;
+}
+
+.marquee-track {
+  display: flex;
+  overflow: hidden;
+}
+.marquee-content {
+  display: flex;
+  gap: 3rem;
+  margin-left: 3rem;
+  animation: scroll 60s linear infinite;
+}
+
+.contentContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-right: 80px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 90px;
+}
+
+.editIssue,
+.deleteButton {
+  width: 70px;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #959a973d;
+  background-color: transparent;
+  color: whitesmoke;
+  font-weight: 800;
+}
+
+.deleteButton:hover {
+  background-color: rgba(255, 0, 0, 0.233);
+  border: 1px solid rgba(255, 0, 0, 0.699);
+}
+
+.editIssue:hover {
+  background-color: rgba(0, 255, 179, 0.336);
+  border: 1px solid rgba(0, 255, 76, 0.726);
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
 }

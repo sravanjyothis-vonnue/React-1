@@ -1,5 +1,6 @@
 [
   {
+    "issueId": 1,
     "projectId": 1,
     "title": "Payment gateway down",
     "due": "Tomorrow",
@@ -8,6 +9,7 @@
     "status": "Pending"
   },
   {
+    "issueId": 2,
     "projectId": 1,
     "title": "Cart total miscalculating tax",
     "due": "Friday",
@@ -16,6 +18,7 @@
     "status": "In Progress"
   },
   {
+    "issueId": 3,
     "projectId": 2,
     "title": "Session token expiring early",
     "due": "Wednesday",
@@ -24,6 +27,7 @@
     "status": "Pending"
   },
   {
+    "issueId": 4,
     "projectId": 2,
     "title": "OAuth redirect loop on mobile",
     "due": "Monday",
@@ -32,6 +36,7 @@
     "status": "Blocked"
   },
   {
+    "issueId": 5,
     "projectId": 3,
     "title": "Duplicate order events from webhook",
     "due": "Thursday",
@@ -40,6 +45,7 @@
     "status": "In Progress"
   },
   {
+    "issueId": 6,
     "projectId": 4,
     "title": "Chart tooltip overlapping on small screens",
     "due": "Next week",

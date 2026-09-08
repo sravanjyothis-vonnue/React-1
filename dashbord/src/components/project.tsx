@@ -1,5 +1,6 @@
 import { ProjectCard } from "./projectCard";
 import data from "../data/projectData.json";
+import { MarqueeRow } from "./marque.tsx";
 
 export function ProjectSection({ onSelected, search }: any) {
   const searchedProject = search
@@ -17,8 +18,8 @@ export function ProjectSection({ onSelected, search }: any) {
       </div>
 
       <div className="projects">
-        {searchedProject.map((project) => {
-          return (
+        <MarqueeRow>
+          {searchedProject.map((project) => (
             <ProjectCard
               key={project.projectId}
               title={project.title}
@@ -28,8 +29,8 @@ export function ProjectSection({ onSelected, search }: any) {
               due={project.due}
               onClick={() => onSelected(project.projectId)}
             />
-          );
-        })}
+          ))}
+        </MarqueeRow>
       </div>
     </>
   );

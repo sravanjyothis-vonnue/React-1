@@ -6,9 +6,20 @@ type taskData = {
   project: number;
   priority: string;
   assignee: string;
+  issueId: Number;
 };
 
-export function TaskCard({ title, project, priority, assignee }: taskData) {
+function handleClick(project: Number) {
+  window.location.pathname = `/dashbord/${project}`;
+}
+
+export function TaskCard({
+  title,
+  project,
+  priority,
+  assignee,
+  issueId,
+}: taskData) {
   return (
     <tr className="issueCard-light">
       <td className="title">{title}</td>
@@ -16,7 +27,13 @@ export function TaskCard({ title, project, priority, assignee }: taskData) {
       <td className="taskCardPriority">{priority}</td>
       <td className="taskCardAssignee">{assignee}</td>
       <td className="menu">
-        <img src={menu} alt="menu" width={16} height={16} />
+        <img
+          src={menu}
+          alt="menu"
+          width={16}
+          height={16}
+          onClick={() => handleClick(issueId)}
+        />
       </td>
     </tr>
   );
