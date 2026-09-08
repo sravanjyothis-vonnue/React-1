@@ -1,0 +1,30 @@
+[
+  {
+    "title": "AVAILABLE",
+    "subtitle": "ENT_01",
+    "count": 24,
+    "description": "PAID TIME OFF",
+    "marked": false
+  },
+  {
+    "title": "USED",
+    "subtitle": "YR_26",
+    "count": 12,
+    "description": "DAYS TAKEN",
+    "marked": false
+  },
+  {
+    "title": "PENDING",
+    "subtitle": "REQ_14",
+    "count": 3,
+    "description": "AWAITING APPROVAL",
+    "marked": true
+  },
+  {
+    "title": "SICK LEAVE",
+    "subtitle": "MED_4",
+    "count": 12,
+    "description": "ANNUAL REMAINING",
+    "marked": false
+  }
+]
