@@ -1,5 +1,6 @@
 import { LoginHeader } from "./loginHeader";
 import z from "zod";
+import { useState } from "react";
 
 const loginForm = z.object({
   username: z.string().min(4).max(20),
@@ -8,34 +9,43 @@ const loginForm = z.object({
 
 type loginCred = z.infer<typeof loginForm>;
 
-function handleOnSubmit(data: FormData) {
-  let loginState = false;
-  const login: loginCred = {
-    username: data.get("username")?.toString() ?? "",
-    password: data.get("password")?.toString() ?? "",
-  };
-  const result = loginForm.safeParse(login);
-
-  if (!result.success) {
-    throw new Error("Validation Error");
-  }
-  if (
-    result.data.username == "username123" &&
-    result.data.password == "password123"
-  ) {
-    loginState = true;
-    window.location.pathname = "/dashbord";
-  }
-  return;
-}
-
 export function Login() {
+  const [success, setSuccess] = useState(true);
+
+  function handleOnSubmit(data: FormData) {
+    let loginState = false;
+    const login: loginCred = {
+      username: data.get("username")?.toString() ?? "",
+      password: data.get("password")?.toString() ?? "",
+    };
+    const result = loginForm.safeParse(login);
+
+    if (!result.success) {
+      setSuccess(false);
+      throw new Error("Validation Error");
+    }
+    if (
+      result.data.username == "username123" &&
+      result.data.password == "password123"
+    ) {
+      loginState = true;
+      window.location.pathname = "/dashbord";
+    } else {
+      setSuccess(false);
+    }
+    return;
+  }
+
   return (
     <div className="loginBackground">
       <LoginHeader />
       <div className="loginBody">
         <div className="loginFormContainer">
+          <div className={success ? "hideError" : "showError"}>
+            <p className="errorText">Wrong credentials!</p>
+          </div>
           <form action="/" onSubmit={(e) => e.preventDefault()} id="loginForm">
+            <div className="welcome">Welcome!</div>
             <label htmlFor="userName" id="userName">
               UserName :{" "}
             </label>

@@ -61,8 +61,9 @@ nav a {
 
 nav a:hover {
   background-color: #8da798b9;
-  transform: translateX(2px);
+  transform: translateX(1px);
   color: white;
+  height: 30px;
 }
 
 .body {

@@ -1,9 +1,13 @@
 import image from "../assets/gift-habeshaw-qJT4x-PgKq0-unsplash.jpg";
-import { Header } from "./header";
+import { Avatar } from "./avatar";
+import { Navbar } from "./navbar";
 export function Profile() {
   return (
     <>
-      <Header />
+      <div className="headerContainer">
+        <Avatar />
+        <Navbar />
+      </div>
       <div className="profileBody">
         <div className="profileContainer">
           <div className="profileContent">

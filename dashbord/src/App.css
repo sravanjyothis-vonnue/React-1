@@ -96,6 +96,7 @@ body {
 
 .loginFormContainer {
   display: flex;
+  flex-direction: column;
   gap: 10px;
   align-items: center;
   justify-content: center;
@@ -315,6 +316,36 @@ body {
 .editIssue:hover {
   background-color: rgba(0, 255, 179, 0.336);
   border: 1px solid rgba(0, 255, 76, 0.726);
+}
+
+.errorText {
+  font-size: 14px;
+  color: white;
+}
+
+.hideError {
+  visibility: hidden;
+}
+
+.showError {
+  visibility: visible;
+  display: flex;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid rgba(255, 0, 0, 0.63);
+  background-color: rgba(255, 0, 0, 0.233);
+  color: whitesmoke;
+  width: 300px;
+  height: 30px;
+}
+
+.welcome {
+  color: whitesmoke;
+  font-family: "Vina Sans";
+  font-size: 28px;
+  margin-bottom: 20px;
 }
 
 @keyframes scroll {

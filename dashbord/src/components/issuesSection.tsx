@@ -14,12 +14,11 @@ export function IssueSection({ selectedIssue }: any) {
   const [priority, setPriority] = useState(null);
   const [sort, setSort] = useState("asc");
   const [open, setOpen] = useState(false);
-  const [submit, onSubmit] = useState(issue);
 
   const sorted =
     sort == "asc"
-      ? [...submit].sort((a, b) => a.title.localeCompare(b.title))
-      : [...submit].sort((a, b) => b.title.localeCompare(a.title));
+      ? [...issue].sort((a, b) => a.title.localeCompare(b.title))
+      : [...issue].sort((a, b) => b.title.localeCompare(a.title));
 
   const showIssues = selectedIssue
     ? sorted.filter((issue) => {
@@ -93,7 +92,7 @@ export function IssueSection({ selectedIssue }: any) {
             )}
           </tbody>
         </table>
-        <ModalOverlay open={open} setOpen={setOpen} onSubmit={onSubmit} />
+        <ModalOverlay open={open} setOpen={setOpen} />
       </div>
     </>
   );

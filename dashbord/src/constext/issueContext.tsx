@@ -1,7 +1,7 @@
 import { useContext, createContext, useState, type ReactNode } from "react";
 import issues from "../data/taskData.json";
 
-interface Issue {
+export interface Issue {
   issueId: number;
   projectId: number;
   title: string;
@@ -14,8 +14,9 @@ interface Issue {
 interface IssueContextType {
   issue: Issue[];
   deleteIssue: (id: number) => void;
+  createIssue: (data: Issue) => void;
+  editIssue: (data: Issue) => void;
 }
-
 const IssueContext = createContext<IssueContextType | null>(null);
 
 export function ContextWraper({ children }: { children: ReactNode }) {
@@ -25,8 +26,16 @@ export function ContextWraper({ children }: { children: ReactNode }) {
     setIssue(issue.filter((issue) => issue.issueId != id));
   };
 
+  const createIssue = (data: Issue) => {
+    setIssue((prev) => [...prev, data]);
+  };
+
+  const editIssue = (data: Omit<Issue, "issueId">, index: number) => {};
+
   return (
-    <IssueContext.Provider value={{ deleteIssue, issue } as any}>
+    <IssueContext.Provider
+      value={{ deleteIssue, issue, createIssue, editIssue } as any}
+    >
       {children}
     </IssueContext.Provider>
   );
