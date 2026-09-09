@@ -1,5 +1,4 @@
 import { useContext, createContext, useState, type ReactNode } from "react";
-import issues from "../data/taskData.json";
 
 export interface Issue {
   issueId: number;
@@ -19,26 +18,42 @@ interface IssueContextType {
 }
 const IssueContext = createContext<IssueContextType | null>(null);
 
-export function ContextWraper({ children }: { children: ReactNode }) {
-  const [issue, setIssue] = useState(issues);
+export async function ContextWraper({ children }: { children: ReactNode }) {
+  try {
+    const response = await fetch("http://localhost:4000/api/issues", {
+      method: "GET",
+      headers: { "Content-Type": "appliation/json" },
+      credentials: "include",
+    });
 
-  const deleteIssue = (id: number) => {
-    setIssue(issue.filter((issue) => issue.issueId != id));
-  };
+    if (!response.ok) {
+      console.error("fetch failed");
+    }
 
-  const createIssue = (data: Issue) => {
-    setIssue((prev) => [...prev, data]);
-  };
+    const issues = await response.json();
+    const [issue, setIssue] = useState(issues);
 
-  const editIssue = (data: Omit<Issue, "issueId">, index: number) => {};
+    const deleteIssue = (id: number) => {
+      setIssue(issue.filter((issue: Issue) => issue.issueId != id));
+    };
 
-  return (
-    <IssueContext.Provider
-      value={{ deleteIssue, issue, createIssue, editIssue } as any}
-    >
-      {children}
-    </IssueContext.Provider>
-  );
+    const createIssue = (data: Issue) => {
+      setIssue((prev: any) => [...prev, data]);
+    };
+
+    const editIssue = (data: Omit<Issue, "issueId">, index: number) => {};
+
+    return (
+      <IssueContext.Provider
+        value={{ deleteIssue, issue, createIssue, editIssue } as any}
+      >
+        {children}
+      </IssueContext.Provider>
+    );
+  } catch (error) {
+    console.error("cannot fetch request");
+    return;
+  }
 }
 
 export function useIssues() {
