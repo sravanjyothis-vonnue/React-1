@@ -3,6 +3,6 @@ import { issue } from "./issues.controller.ts";
 
 export const issueRoutes = Router();
 
-issueRoutes.get("/issues", issue.listIssues);
+issueRoutes.get("/", issue.listIssues);
 
-issueRoutes.post("/issues", issue.createIssues);
+issueRoutes.post("/", issue.createIssues);

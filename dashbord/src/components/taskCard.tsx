@@ -19,7 +19,7 @@ export function TaskCard({
 }: taskData) {
   const navigate = useNavigate();
   function handleClick(project: Number) {
-    navigate(`/dashbord/${project}`);
+    navigate(`/dashboard/${project}`);
   }
   return (
     <tr className="issueCard-light">

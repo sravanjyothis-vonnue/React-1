@@ -1,4 +1,11 @@
-import { useContext, createContext, useState, type ReactNode } from "react";
+import {
+  useContext,
+  createContext,
+  useState,
+  type ReactNode,
+  useEffect,
+} from "react";
+import { useAuth } from "./authContext";
 
 export interface Issue {
   issueId: number;
@@ -18,42 +25,40 @@ interface IssueContextType {
 }
 const IssueContext = createContext<IssueContextType | null>(null);
 
-export async function ContextWraper({ children }: { children: ReactNode }) {
-  try {
-    const response = await fetch("http://localhost:4000/api/issues", {
-      method: "GET",
-      headers: { "Content-Type": "appliation/json" },
+export function Datafetch({ children }: { children: ReactNode }) {
+  const { user } = useAuth();
+  const [issue, setIssue] = useState<Issue[]>([]);
+
+  useEffect(() => {
+    if (!user) return;
+    fetch("http://localhost:4000/api/issues", {
       credentials: "include",
-    });
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => setIssue(json.data))
+      .catch(() => setIssue([]));
+  }, []);
 
-    if (!response.ok) {
-      console.error("fetch failed");
+  const deleteIssue = (id: number) => {
+    if (issue == null) {
+      throw new Error("Issues empty");
     }
+    setIssue(issue.filter((issue: Issue) => issue.issueId != id));
+  };
 
-    const issues = await response.json();
-    const [issue, setIssue] = useState(issues);
+  const createIssue = (data: Issue) => {
+    setIssue((prev: Issue[]) => [...prev, data]);
+  };
 
-    const deleteIssue = (id: number) => {
-      setIssue(issue.filter((issue: Issue) => issue.issueId != id));
-    };
+  const editIssue = (data: Omit<Issue, "issueId">, index: number) => {};
 
-    const createIssue = (data: Issue) => {
-      setIssue((prev: any) => [...prev, data]);
-    };
-
-    const editIssue = (data: Omit<Issue, "issueId">, index: number) => {};
-
-    return (
-      <IssueContext.Provider
-        value={{ deleteIssue, issue, createIssue, editIssue } as any}
-      >
-        {children}
-      </IssueContext.Provider>
-    );
-  } catch (error) {
-    console.error("cannot fetch request");
-    return;
-  }
+  return (
+    <IssueContext.Provider
+      value={{ deleteIssue, issue, createIssue, editIssue } as any}
+    >
+      {children}
+    </IssueContext.Provider>
+  );
 }
 
 export function useIssues() {

@@ -274,6 +274,12 @@ body {
   animation: scroll 60s linear infinite;
 }
 
+.marquee-stop {
+  display: flex;
+  gap: 3rem;
+  margin-left: 3rem;
+}
+
 .contentContainer {
   display: flex;
   justify-content: center;

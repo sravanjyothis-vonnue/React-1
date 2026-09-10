@@ -285,10 +285,10 @@ img {
 
 .filterContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   margin-bottom: 20px;
-  width: 600px;
+  width: 550px;
   height: 45px;
   gap: 15px;
   border: 1px solid #535c5783;

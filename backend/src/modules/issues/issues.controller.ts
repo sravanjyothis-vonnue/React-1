@@ -3,7 +3,8 @@ import { listData, createIssue } from "./issues.service.ts";
 
 class issuesController {
   async listIssues(req: Request, res: Response, next: NextFunction) {
-    const data = listData();
+    console.log("hello");
+    const data = await listData();
     res.status(200).json({
       data: data,
     });

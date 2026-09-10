@@ -12,7 +12,8 @@ class auth {
       sameSite: "lax",
     });
     res.status(200).json({
-      message: "user logged-in",
+      message: "user logged -in",
+      token: token,
     });
   }
 

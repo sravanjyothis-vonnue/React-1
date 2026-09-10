@@ -8,6 +8,8 @@ export function Search({ setSearch }: any) {
       className="searchBar"
       placeholder="Search here..."
       onChange={(e) => {
+        const marquee = document.getElementById("marquee-content");
+        marquee?.classList.add();
         if (timerRef.current) {
           clearTimeout(timerRef.current);
         }

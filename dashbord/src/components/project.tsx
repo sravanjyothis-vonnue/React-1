@@ -1,10 +1,33 @@
 import { ProjectCard } from "./projectCard";
-import data from "../data/projectData.json";
 import { MarqueeRow } from "./marque.tsx";
+import { useEffect, useState } from "react";
+import { useAuth } from "../constext/authContext.tsx";
+
+interface dataSchema {
+  projectId: number;
+  status: string;
+  due: string;
+  title: string;
+  scope: string;
+  description: string;
+}
+[];
 
 export function ProjectSection({ onSelected, search }: any) {
+  const { user } = useAuth();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    if (!user) return;
+    fetch("http://localhost:4000/api/projects", {
+      credentials: "include",
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => setData(json.data))
+      .catch(() => setData([]));
+  }, []);
+
   const searchedProject = search
-    ? data.filter((project) => project.title.includes(search))
+    ? data.filter((project: dataSchema) => project.title.includes(search))
     : data;
 
   return (
@@ -19,7 +42,7 @@ export function ProjectSection({ onSelected, search }: any) {
 
       <div className="projects">
         <MarqueeRow>
-          {searchedProject.map((project) => (
+          {searchedProject.map((project: dataSchema) => (
             <ProjectCard
               key={project.projectId}
               title={project.title}

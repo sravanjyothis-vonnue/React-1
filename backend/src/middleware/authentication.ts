@@ -7,16 +7,16 @@ export function authentication(
   res: Response,
   next: NextFunction,
 ) {
-  try {
-    const barear = req.headers["authorization"]?.split(" ")[1] || "";
-    const key = process.env.JWT_SECRET;
-    if (key == undefined) {
-      throw new Error("cannot fetch secrect key");
-    }
-    const isMatch = jwt.verify(barear, key);
-    req.body = isMatch;
-  } catch (error) {
-    next(error);
+  if (req.body == undefined) {
+    req.body = {};
   }
+  const barear =
+    req.headers["authorization"]?.split(" ")[1] || req.cookies?.jwt;
+  const key = process.env.JWT_SECRET;
+  if (key == undefined) {
+    throw new Error("cannot fetch secrect key");
+  }
+  const isMatch = jwt.verify(barear, key);
+  req.body.user = isMatch;
   return next();
 }

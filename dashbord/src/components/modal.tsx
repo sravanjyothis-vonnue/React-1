@@ -21,7 +21,7 @@ export function ModalOverlay({ open, setOpen }: any) {
     padding: "20px",
   };
 
-  function handleSubmit(formData: any, setOpen: any) {
+  async function handleSubmit(formData: any, setOpen: any) {
     let issueData = {
       projectId: Number(formData.get("projectId")),
       issueId: Math.floor(Math.random() * 100),
@@ -52,7 +52,31 @@ export function ModalOverlay({ open, setOpen }: any) {
       priority: result.data.priority,
       status: "Pending",
     };
+    const dataDB = {
+      projectId: result.data.projectId,
+      issueId: issueData.issueId,
+      title: result.data.title,
+      due: result.data.due,
+      assignee: result.data.assignee,
+      priority: result.data.priority,
+      status: "Pending",
+    };
     createIssue(data);
+    try {
+      const response = await fetch("http://localhost:4000/api/issues", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataDB),
+      });
+
+      if (!response.ok) {
+        throw new Error("Faild to create data");
+      }
+    } catch (error) {
+      console.error(error);
+      return;
+    }
     toast("Issue Added successfully", { duration: 3000 });
     setOpen(false);
   }

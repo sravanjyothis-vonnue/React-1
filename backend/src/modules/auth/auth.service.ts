@@ -8,21 +8,22 @@ import {
 } from "./auth.schema.ts";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { authenticationError, BadRequestError } from "../../utils/errors.ts";
 
 const key = process.env.JWT_SECRET || "secrect_key";
 
 export async function login(body: loginSchema) {
   const result = loginCreds.safeParse(body);
   if (!result.success) {
-    throw new Error("validation error");
+    throw new BadRequestError("Validation error");
   }
   const user = await repository.findUser(body.username);
   if (!user) {
-    throw new Error("user is not registerd");
+    throw new Error("User not Found");
   }
   const isMatch = await bcrypt.compare(result.data.password, user?.password);
   if (!isMatch) {
-    throw new Error("Unauthorized");
+    throw new authenticationError("authentication failed");
   }
   const token = jwt.sign({ userId: user.id, role: user.role }, key, {
     expiresIn: "1h",

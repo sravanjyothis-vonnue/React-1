@@ -1,11 +1,12 @@
 // prisma/seed.ts
+import "dotenv/config";
 import { prisma } from "../src/db/connect.ts";
 
 const projects = [
   {
     projectId: 1,
     status: "Active",
-    due: "Ends Friday",
+    due: "Friday",
     title: "Foundry Engine",
     scope: "System",
     description: "Refactor canvas rendering memory leak on font upload",
@@ -13,7 +14,7 @@ const projects = [
   {
     projectId: 2,
     status: "Sprint 12",
-    due: "Ends Today",
+    due: "Today",
     title: "Marketing site",
     scope: "Work",
     description: "Update specimen preview Mobile responsive grid",
@@ -21,7 +22,7 @@ const projects = [
   {
     projectId: 3,
     status: "Backlog",
-    due: "Ends Tomorrow",
+    due: "Tomorrow",
     title: "User analytics",
     scope: "Internal",
     description: "Heatmap data collection Conversion funnel v2",
@@ -29,7 +30,7 @@ const projects = [
   {
     projectId: 4,
     status: "In Review",
-    due: "Ends Monday",
+    due: "Monday",
     title: "Auth Gateway",
     scope: "Backend",
     description: "Migrate session tokens to rotating refresh token flow",
@@ -37,7 +38,7 @@ const projects = [
   {
     projectId: 5,
     status: "Blocked",
-    due: "Ends Wednesday",
+    due: "Wednesday",
     title: "Order Sync Service",
     scope: "Integration",
     description: "Reconcile duplicate order events from webhook retries",
@@ -45,7 +46,7 @@ const projects = [
   {
     projectId: 6,
     status: "Active",
-    due: "Ends Thursday",
+    due: "Thursday",
     title: "Dashboard UI Revamp",
     scope: "Frontend",
     description: "Replace legacy chart library with new theming support",
@@ -53,7 +54,7 @@ const projects = [
   {
     projectId: 7,
     status: "Completed",
-    due: "Ended Tuesday",
+    due: "Tuesday",
     title: "Notification Pipeline",
     scope: "Backend",
     description:
@@ -62,58 +63,12 @@ const projects = [
   {
     projectId: 8,
     status: "Active",
-    due: "Ends Sunday",
+    due: "Sunday",
     title: "Inventory Search",
     scope: "System",
     description: "Add fuzzy matching to product search index",
   },
 ];
-
-// Helper: converts relative day text to an actual Date, relative to today
-function relativeDateToDate(text: string): Date {
-  const today = new Date();
-  const daysOfWeek = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  if (text === "Tomorrow") {
-    const d = new Date(today);
-    d.setDate(d.getDate() + 1);
-    return d;
-  }
-  if (text === "Next week") {
-    const d = new Date(today);
-    d.setDate(d.getDate() + 7);
-    return d;
-  }
-  const dayIndex = daysOfWeek.indexOf(text);
-  if (dayIndex !== -1) {
-    const d = new Date(today);
-    const diff = (dayIndex + 7 - d.getDay()) % 7 || 7; // next occurrence of that weekday
-    d.setDate(d.getDate() + diff);
-    return d;
-  }
-  // fallback, shouldn't hit this with current data
-  return today;
-}
-
-// Helper: maps display status strings to your `stat` enum values
-function toStatEnum(status: string): "Pending" | "In_Progress" | "Blocked" {
-  const map: Record<string, "Pending" | "In_Progress" | "Blocked"> = {
-    Pending: "Pending",
-    "In Progress": "In_Progress",
-    Blocked: "Blocked",
-  };
-  const mapped = map[status];
-  if (!mapped) throw new Error(`Unrecognized issue status: "${status}"`);
-  return mapped;
-}
 
 const issuesData = [
   {
@@ -172,46 +127,109 @@ const issuesData = [
   },
 ];
 
+const DAYS = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+function relativeDateToDate(text: string): Date {
+  const today = new Date();
+  if (text === "Today") return today;
+  if (text === "Tomorrow") {
+    const d = new Date(today);
+    d.setDate(d.getDate() + 1);
+    return d;
+  }
+  if (text === "Next week") {
+    const d = new Date(today);
+    d.setDate(d.getDate() + 7);
+    return d;
+  }
+  const dayIndex = DAYS.indexOf(text);
+  if (dayIndex !== -1) {
+    const d = new Date(today);
+    const diff = (dayIndex + 7 - d.getDay()) % 7 || 7;
+    d.setDate(d.getDate() + diff);
+    return d;
+  }
+  throw new Error(`Unrecognized relative date: "${text}"`);
+}
+
+const STATUS_MAP: Record<string, "Pending" | "In_Progress" | "Blocked"> = {
+  Pending: "Pending",
+  "In Progress": "In_Progress",
+  Blocked: "Blocked",
+};
+function toStatEnum(status: string) {
+  const mapped = STATUS_MAP[status];
+  if (!mapped) throw new Error(`Unrecognized issue status: "${status}"`);
+  return mapped;
+}
+
+const PRIORITY_MAP: Record<string, "Low" | "Medium" | "High"> = {
+  Low: "Low",
+  Medium: "Medium",
+  High: "High",
+};
+function toPriorityEnum(priority: string) {
+  const mapped = PRIORITY_MAP[priority];
+  if (!mapped) throw new Error(`Unrecognized priority: "${priority}"`);
+  return mapped;
+}
+
 async function main() {
   for (const project of projects) {
     await prisma.projects.upsert({
       where: { projectId: project.projectId },
-      update: project,
-      create: project,
+      update: { ...project, due: project.due },
+      create: { ...project, due: project.due },
     });
   }
   console.log(`Seeded ${projects.length} projects.`);
 
   for (const issue of issuesData) {
+    const data = {
+      projectId: issue.projectId,
+      title: issue.title,
+      due: relativeDateToDate(issue.due),
+      assignee: issue.assignee,
+      priority: toPriorityEnum(issue.priority),
+      status: toStatEnum(issue.status),
+    };
     await prisma.issues.upsert({
       where: { issueId: issue.issueId },
-      update: {
-        projectId: issue.projectId,
-        title: issue.title,
-        due: relativeDateToDate(issue.due),
-        assignee: issue.assignee,
-        priority: issue.priority as "Low" | "Medium" | "High",
-        status: toStatEnum(issue.status),
-      },
-      create: {
-        issueId: issue.issueId,
-        projectId: issue.projectId,
-        title: issue.title,
-        due: relativeDateToDate(issue.due),
-        assignee: issue.assignee,
-        priority: issue.priority as "Low" | "Medium" | "High",
-        status: toStatEnum(issue.status),
-      },
+      update: data,
+      create: { issueId: issue.issueId, ...data },
     });
   }
   console.log(`Seeded ${issuesData.length} issues.`);
 }
 
 main()
+  .then(() => console.log("Database fully seeded"))
   .catch((e) => {
     console.error(e);
     process.exit(1);
   })
   .finally(async () => {
+    // Resync autoincrement sequences after manually seeding explicit IDs
+    await prisma.$executeRawUnsafe(`
+  SELECT setval(
+    pg_get_serial_sequence('"issues"', 'issueId'),
+    COALESCE((SELECT MAX("issueId") FROM "issues"), 1)
+  );
+`);
+
+    await prisma.$executeRawUnsafe(`
+  SELECT setval(
+    pg_get_serial_sequence('"projects"', 'projectId'),
+    COALESCE((SELECT MAX("projectId") FROM "projects"), 1)
+  );
+`);
     await prisma.$disconnect();
   });

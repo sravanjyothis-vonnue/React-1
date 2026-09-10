@@ -1,5 +1,5 @@
-import { Project } from "typescript/unstable/sync";
 import type { issuesCreateInput } from "../../generated/prisma/models.ts";
+import { BadRequestError } from "../../utils/errors.ts";
 import { repository } from "./issues.repository.ts";
 import { issues } from "./issues.schema.ts";
 
@@ -11,7 +11,7 @@ export async function listData() {
 export async function createIssue(body: issuesCreateInput) {
   const result = issues.safeParse(body);
   if (!result.success) {
-    throw new Error("validation error");
+    throw new BadRequestError("Validation error");
   }
 
   const data = {

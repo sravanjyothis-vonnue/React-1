@@ -1,24 +1,36 @@
 import "./App.css";
-import { ContextWraper } from "../src/constext/issueContext";
+import { Datafetch } from "../src/constext/issueContext";
 import { Shell } from "./components/shell";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import { Team } from "./components/team";
 import { Login } from "./components/login";
 import { Profile } from "./components/profile";
 import { ViewIssue } from "./components/viewIssue";
 import { Not_Found } from "./components/notFound";
+import { Authenticate } from "./constext/authContext";
+
+function DataLayout() {
+  return (
+    <Datafetch>
+      <Outlet />
+    </Datafetch>
+  );
+}
+
 function App() {
   return (
-    <ContextWraper>
+    <Authenticate>
       <Routes>
-        <Route path="/dashbord" element={<Shell />} />
-        <Route path="/team" element={<Team />} />
         <Route path="/" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/dashbord/:id" element={<ViewIssue />} />
+        <Route element={<DataLayout />}>
+          <Route path="/dashboard" element={<Shell />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/dashboard/:id" element={<ViewIssue />} />
+        </Route>
         <Route path="*" element={<Not_Found />} />
       </Routes>
-    </ContextWraper>
+    </Authenticate>
   );
 }
 

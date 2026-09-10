@@ -1,8 +1,5 @@
 import { prisma } from "../../db/connect.ts";
-import type {
-  issuesCreateInput,
-  issuesUncheckedCreateInput,
-} from "../../generated/prisma/models.ts";
+import type { issuesUncheckedCreateInput } from "../../generated/prisma/models.ts";
 
 class issueRepository {
   async list() {

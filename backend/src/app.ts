@@ -10,11 +10,14 @@ import { errorHandler, routeNotFound } from "./middleware/errorHandler.ts";
 import cors from "cors";
 import { authentication } from "./middleware/authentication.ts";
 import { issueRoutes } from "./modules/issues/issues.routes.ts";
+import { projectRoutes } from "./modules/projects/projects.routes.ts";
+import cookieParser from "cookie-parser";
 
 export const httpServer = express();
 
 httpServer.use(cors({ origin: "http://localhost:5173", credentials: true }));
 httpServer.use(morgan("dev"));
+httpServer.use(cookieParser());
 httpServer.use(express.json());
 httpServer.use("/health", (req: Request, res: Response, next: NextFunction) => {
   const result = prisma.$executeRaw`SELECT 1`;
@@ -30,6 +33,7 @@ httpServer.use("/health", (req: Request, res: Response, next: NextFunction) => {
 
 httpServer.use("/auth", authRoutes);
 httpServer.use("/api/issues", authentication, issueRoutes);
+httpServer.use("/api/projects", authentication, projectRoutes);
 
 httpServer.use(routeNotFound);
 httpServer.use(errorHandler);
