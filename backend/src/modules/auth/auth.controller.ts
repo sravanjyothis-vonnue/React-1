@@ -27,8 +27,8 @@ class auth {
   async meController(req: Request, res: Response, next: NextFunction) {
     res.status(200).json({
       message: {
-        me: req.body.userId,
-        role: req.body.role,
+        me: req.body.user.userId,
+        role: req.body.user.role,
       },
     });
   }

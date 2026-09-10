@@ -29,13 +29,18 @@ export function Authenticate({ children }: { children: ReactNode }) {
   const [user, setUser] = useState(false);
   console.log(user);
   const [success, setSuccess] = useState(true);
+  const [me, setme] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:4000/auth/me", { credentials: "include" })
       .then((res) => (res.ok ? res.json() : null))
-      .then(setUser)
+      .then((json) => {
+        setUser(true);
+        setme(json.message.role);
+      })
       .catch(() => setUser(false));
   }, []);
+  console.log(me);
 
   const login = async (data: FormData) => {
     const loginData: loginCred = {
@@ -77,7 +82,10 @@ export function Authenticate({ children }: { children: ReactNode }) {
     }
   };
 
-  const logout = () => setUser(false);
+  const logout = () => {
+    setUser(false);
+    setme(null);
+  };
 
   return (
     <AuthContext.Provider value={{ login, logout, user, success }}>
