@@ -1,31 +1,10 @@
 import { Box, Modal } from "@mui/material";
 import { taskSchema } from "./taskSchema";
 import { toast } from "sonner";
+import { useIssues } from "../constext/issueContext";
 
-function handleSubmit(formData: any, setOpen: any, onSubmit: any) {
-  let issueData = {
-    projectId: Number(formData.get("projectId")),
-    title: formData.get("issue"),
-    due: new Date(formData.get("due")),
-    assignee: formData.get("assignee"),
-    priority: formData.get("priority"),
-    status: "Pending",
-  };
-
-  const result = taskSchema.safeParse(issueData);
-  if (!result.success) {
-    const messages = result.error.issues
-      .map((issues) => issues.message)
-      .join("\n");
-    toast.error(messages, { duration: 3000 });
-    throw new Error("Validation failed");
-  }
-
-  onSubmit((prev: any) => [...prev, issueData]);
-  setOpen(false);
-}
-
-export function ModalOverlay({ open, setOpen, onSubmit }: any) {
+export function ModalOverlay({ open, setOpen }: any) {
+  const { createIssue } = useIssues();
   const style = {
     display: "flex",
     flexDirection: "column",
@@ -41,6 +20,43 @@ export function ModalOverlay({ open, setOpen, onSubmit }: any) {
     borderRadius: "50px",
     padding: "20px",
   };
+
+  function handleSubmit(formData: any, setOpen: any) {
+    let issueData = {
+      projectId: Number(formData.get("projectId")),
+      issueId: Math.floor(Math.random() * 100),
+      title: formData.get("issue"),
+      due: new Date(formData.get("due")),
+      assignee: formData.get("assignee"),
+      priority: formData.get("priority"),
+      status: "Pending",
+    };
+
+    const result = taskSchema.safeParse(issueData);
+    if (!result.success) {
+      result.error.issues.forEach((issues) =>
+        toast.error(`${String(issues.path[0])} : ${issues.message}`, {
+          duration: 6000,
+        }),
+      );
+
+      throw new Error("Validation failed");
+    }
+
+    const data = {
+      projectId: result.data.projectId,
+      issueId: issueData.issueId,
+      title: result.data.title,
+      due: result.data.due.toLocaleDateString(),
+      assignee: result.data.assignee,
+      priority: result.data.priority,
+      status: "Pending",
+    };
+    createIssue(data);
+    toast("Issue Added successfully", { duration: 3000 });
+    setOpen(false);
+  }
+
   return (
     <>
       <Modal open={open} className="addForm" onClose={() => setOpen(false)}>
@@ -82,13 +98,11 @@ export function ModalOverlay({ open, setOpen, onSubmit }: any) {
             <label className="formLabel" htmlFor="priority1">
               Priority :
             </label>
-            <input
-              className="formInput"
-              type="text"
-              name="priority"
-              id="priority1"
-              placeholder="Issue Priority"
-            />
+            <select id="priority1" name="priority">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
             <label className="formLabel" htmlFor="priority1">
               Project Id :
             </label>
@@ -105,19 +119,23 @@ export function ModalOverlay({ open, setOpen, onSubmit }: any) {
             <button
               className="formButton"
               onClick={() => {
-                alert("Are you sure?");
-                setOpen(false);
+                const status = window.confirm("Are you sure?");
+                if (status) {
+                  setOpen(false);
+                }
               }}
             >
               Close
             </button>
             <button
               className="formButton"
+              id="submitButton"
               onClick={() => {
                 let data = new FormData(
                   document.getElementById("inputForm") as HTMLFormElement,
                 );
-                handleSubmit(data, setOpen, onSubmit);
+
+                handleSubmit(data, setOpen);
               }}
             >
               Submit

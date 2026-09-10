@@ -6,7 +6,7 @@ export function Search({ setSearch }: any) {
   return (
     <input
       className="searchBar"
-      placeholder="Search for Projects..."
+      placeholder="Search here..."
       onChange={(e) => {
         if (timerRef.current) {
           clearTimeout(timerRef.current);

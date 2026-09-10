@@ -1,5 +1,5 @@
 import { useState } from "react";
-import issues from "../data/taskData.json";
+import { useIssues } from "../constext/issueContext";
 import { Filter } from "./filter";
 import { TaskCard } from "./taskCard";
 import { ModalOverlay } from "./modal";
@@ -9,16 +9,16 @@ function handleClick({ setOpen }: any) {
 }
 
 export function IssueSection({ selectedIssue }: any) {
+  const { issue } = useIssues();
   const [status, setStatus] = useState(null);
   const [priority, setPriority] = useState(null);
   const [sort, setSort] = useState("asc");
   const [open, setOpen] = useState(false);
-  const [submit, onSubmit] = useState(issues);
 
   const sorted =
     sort == "asc"
-      ? [...submit].sort((a, b) => a.title.localeCompare(b.title))
-      : [...submit].sort((a, b) => b.title.localeCompare(a.title));
+      ? [...issue].sort((a, b) => a.title.localeCompare(b.title))
+      : [...issue].sort((a, b) => b.title.localeCompare(a.title));
 
   const showIssues = selectedIssue
     ? sorted.filter((issue) => {
@@ -85,13 +85,14 @@ export function IssueSection({ selectedIssue }: any) {
                     project={issue.projectId}
                     priority={issue.priority as string}
                     assignee={issue.assignee}
+                    issueId={issue.issueId}
                   />
                 );
               })
             )}
           </tbody>
         </table>
-        <ModalOverlay open={open} setOpen={setOpen} onSubmit={onSubmit} />
+        <ModalOverlay open={open} setOpen={setOpen} />
       </div>
     </>
   );

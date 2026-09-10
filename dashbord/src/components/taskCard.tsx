@@ -1,4 +1,5 @@
 import menu from "../assets/menu-dots-svgrepo-com.svg";
+import { useNavigate } from "react-router-dom";
 
 type taskData = {
   key: string;
@@ -6,9 +7,20 @@ type taskData = {
   project: number;
   priority: string;
   assignee: string;
+  issueId: Number;
 };
 
-export function TaskCard({ title, project, priority, assignee }: taskData) {
+export function TaskCard({
+  title,
+  project,
+  priority,
+  assignee,
+  issueId,
+}: taskData) {
+  const navigate = useNavigate();
+  function handleClick(project: Number) {
+    navigate(`/dashbord/${project}`);
+  }
   return (
     <tr className="issueCard-light">
       <td className="title">{title}</td>
@@ -16,7 +28,13 @@ export function TaskCard({ title, project, priority, assignee }: taskData) {
       <td className="taskCardPriority">{priority}</td>
       <td className="taskCardAssignee">{assignee}</td>
       <td className="menu">
-        <img src={menu} alt="menu" width={16} height={16} />
+        <img
+          src={menu}
+          alt="menu"
+          width={16}
+          height={16}
+          onClick={() => handleClick(issueId)}
+        />
       </td>
     </tr>
   );

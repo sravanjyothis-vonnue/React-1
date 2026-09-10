@@ -1,0 +1,17 @@
+[
+  {
+    "name": "ALICE TURNER",
+    "src": "/horizontal-portrait-smiling-happy-young-pleasant-looking-female-wears-denim-shirt-stylish-glasses-with-straight-blonde-hair-expresses-positiveness-poses.jpg",
+    "role": "Backend Developer"
+  },
+  {
+    "name": "JAMES",
+    "src": "/portrait-happy-male-with-broad-smile.jpg",
+    "role": "Designer"
+  },
+  {
+    "name": "STEAPHEN",
+    "src": "/young-bearded-man-with-striped-shirt.jpg",
+    "role": "Q & A"
+  }
+]
