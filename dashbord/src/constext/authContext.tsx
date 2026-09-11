@@ -20,6 +20,7 @@ interface AuthContextType {
   logout: () => void;
   success: any;
   user: any;
+  me: any;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -93,6 +94,7 @@ export function Authenticate({ children }: { children: ReactNode }) {
       const token = params.get("token");
       if (token) {
         setUser(true);
+        localStorage.setItem("token", token);
         navigate("/dashboard");
       } else {
         navigate("/");
@@ -106,7 +108,7 @@ export function Authenticate({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ login, logout, user, success }}>
+    <AuthContext.Provider value={{ login, logout, user, success, me }}>
       {children}
     </AuthContext.Provider>
   );
