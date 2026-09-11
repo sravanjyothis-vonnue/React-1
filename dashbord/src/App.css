@@ -362,3 +362,81 @@ body {
     transform: translateX(-100%);
   }
 }
+
+@media screen and (max-width: 786px) {
+  .body {
+    margin: 0px;
+  }
+
+  p {
+    font-size: 10px;
+  }
+
+  .searchBar,
+  .priority,
+  .taskCardPriority {
+    display: none;
+  }
+
+  .userContainer {
+    display: none;
+  }
+  nav {
+    width: 398px;
+  }
+  .filterContainer {
+    width: 390px;
+  }
+  label {
+    font-size: 12px;
+  }
+  #status,
+  #priority,
+  #sort {
+    width: 60px;
+    font-size: 10px;
+    padding: 2px;
+  }
+  .issuesTable {
+    font-size: 10px;
+    padding: 4px;
+    gap: 5px;
+  }
+  .title,
+  .project,
+  .assignee {
+    width: 60px;
+  }
+  .taskCardAssignee {
+    margin-left: 14px;
+  }
+  .projects {
+    margin: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  .card {
+    width: 250px;
+    height: 250px;
+  }
+  .cardHeader {
+    margin: 0;
+  }
+  h3 {
+    margin: 0;
+    margin-bottom: 5px;
+    width: 120px;
+  }
+  .badge {
+    padding-left: 10px;
+  }
+  .title {
+    font-size: 9px;
+  }
+}
+
+@media (width <= 786) {
+  .body {
+    margin: 0px;
+  }
+}

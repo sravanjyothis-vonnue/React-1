@@ -14,6 +14,15 @@ class authRepository {
   async createUser(data: Omit<user, "id" | "createdAt">) {
     return await prisma.user.create({ data });
   }
+
+  async findUserWithId(id: string) {
+    const user = prisma.user.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    return user;
+  }
 }
 
 export const repository = new authRepository();

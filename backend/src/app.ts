@@ -15,7 +15,15 @@ import cookieParser from "cookie-parser";
 
 export const httpServer = express();
 
-httpServer.use(cors({ origin: "http://localhost:5173", credentials: true }));
+httpServer.use(
+  cors({
+    origin: [
+      "https://preeminent-taffy-564d2c.netlify.app",
+      "http://localhost:5173",
+    ],
+    credentials: true,
+  }),
+);
 httpServer.use(morgan("dev"));
 httpServer.use(cookieParser());
 httpServer.use(express.json());

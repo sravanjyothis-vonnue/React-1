@@ -8,4 +8,8 @@ authRoutes.post("/login", authControl.loginController);
 
 authRoutes.post("/register", authControl.registerController);
 
+authRoutes.post("/magic-link", authControl.magicLinkRequest);
+
+authRoutes.get("/magic-link/verify", authControl.magicLinkVerify);
+
 authRoutes.get("/me", authentication, authControl.meController);

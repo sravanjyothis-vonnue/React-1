@@ -8,7 +8,6 @@ import { useEffect } from "react";
 export function Team() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [search, setSearch] = useState<null | string>(null);
   useEffect(() => {
     if (!user) {
       navigate("/");

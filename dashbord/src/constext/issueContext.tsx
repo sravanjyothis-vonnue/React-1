@@ -31,7 +31,7 @@ export function Datafetch({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!user) return;
-    fetch("http://localhost:4000/api/issues", {
+    fetch("https://8t6gkm38-4000.inc1.devtunnels.ms/api/issues", {
       credentials: "include",
     })
       .then((res) => (res.ok ? res.json() : null))
@@ -50,7 +50,7 @@ export function Datafetch({ children }: { children: ReactNode }) {
     setIssue((prev: Issue[]) => [...prev, data]);
   };
 
-  const editIssue = (data: Omit<Issue, "issueId">, index: number) => {};
+  const editIssue = (_data: Omit<Issue, "issueId">, _index: number) => {};
 
   return (
     <IssueContext.Provider

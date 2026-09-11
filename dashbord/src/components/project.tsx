@@ -18,7 +18,7 @@ export function ProjectSection({ onSelected, search }: any) {
   const [data, setData] = useState([]);
   useEffect(() => {
     if (!user) return;
-    fetch("http://localhost:4000/api/projects", {
+    fetch("https://8t6gkm38-4000.inc1.devtunnels.ms/api/projects", {
       credentials: "include",
     })
       .then((res) => (res.ok ? res.json() : null))
