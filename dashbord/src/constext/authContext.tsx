@@ -28,7 +28,6 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export function Authenticate({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(false);
-  console.log(user);
   const [success, setSuccess] = useState(true);
   const [me, setme] = useState(null);
 
@@ -44,11 +43,9 @@ export function Authenticate({ children }: { children: ReactNode }) {
       .then(() => navigate("/dashboard"))
       .catch(() => setUser(false));
   }, []);
-  console.log(me);
 
   const login = async (data: FormData) => {
     const params = new URLSearchParams(window.location.search);
-    console.log(params.size);
     if (!params.size) {
       const loginData: loginCred = {
         username: (data.get("username") as string) ?? "",
@@ -81,10 +78,10 @@ export function Authenticate({ children }: { children: ReactNode }) {
           setSuccess(false);
           throw new Error(`UNAUTHORIZED : ${data.error}`);
         }
-        console.log(data);
         localStorage.setItem("token", data.token);
         setUser(true);
         navigate("/dashboard");
+        return;
       } catch (error) {
         console.error(`Login failed : ${error}`);
 

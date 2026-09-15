@@ -5,7 +5,7 @@ export function Login() {
   const { login, success } = useAuth();
 
   async function handleOnSubmit(data: FormData) {
-    login(data);
+    await login(data);
   }
 
   return (

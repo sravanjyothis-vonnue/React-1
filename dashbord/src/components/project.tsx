@@ -20,6 +20,7 @@ export function ProjectSection({ onSelected, search }: any) {
     if (!user) return;
     fetch("https://8t6gkm38-4000.inc1.devtunnels.ms/api/projects", {
       credentials: "include",
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     })
       .then((res) => (res.ok ? res.json() : null))
       .then((json) => setData(json.data))

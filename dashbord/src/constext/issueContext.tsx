@@ -33,6 +33,7 @@ export function Datafetch({ children }: { children: ReactNode }) {
     if (!user) return;
     fetch("https://8t6gkm38-4000.inc1.devtunnels.ms/api/issues", {
       credentials: "include",
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     })
       .then((res) => (res.ok ? res.json() : null))
       .then((json) => setIssue(json.data))

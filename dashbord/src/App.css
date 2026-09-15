@@ -368,6 +368,23 @@ body {
     margin: 0px;
   }
 
+  .cardConttainer {
+    font-size: 18px;
+    width: 350px;
+    height: 550px;
+  }
+
+  .cardContent {
+    font-size: 16px;
+    gap: 0px;
+  }
+
+  .teamBody {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-left: 28px;
+  }
+
   p {
     font-size: 10px;
   }

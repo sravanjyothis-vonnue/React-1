@@ -39,8 +39,7 @@ export function ModalOverlay({ open, setOpen }: any) {
           duration: 6000,
         }),
       );
-
-      throw new Error("Validation failed");
+      return;
     }
 
     const data = {
