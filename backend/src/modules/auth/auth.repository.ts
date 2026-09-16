@@ -16,12 +16,24 @@ class authRepository {
   }
 
   async findUserWithId(id: string) {
-    const user = prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
         id: id,
       },
     });
     return user;
+  }
+
+  async changePassword(newPassword: string, id: string) {
+    const update = await prisma.user.update({
+      where: {
+        id: id,
+      },
+      data: {
+        password: newPassword,
+      },
+    });
+    return;
   }
 }
 

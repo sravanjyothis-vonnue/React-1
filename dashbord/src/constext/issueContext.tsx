@@ -31,13 +31,31 @@ export function Datafetch({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!user) return;
-    fetch("https://8t6gkm38-4000.inc1.devtunnels.ms/api/issues", {
-      credentials: "include",
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    })
-      .then((res) => (res.ok ? res.json() : null))
-      .then((json) => setIssue(json.data))
-      .catch(() => setIssue([]));
+    async function fetchApi() {
+      try {
+        const response = await fetch(
+          "https://8t6gkm38-4000.inc1.devtunnels.ms/api/issues",
+          {
+            headers: {
+              Authorization: `Barear ${localStorage.getItem("token")}`,
+            },
+          },
+        );
+        if (!response.ok) {
+          setIssue([]);
+          throw new Error("Cannot fetch data");
+        }
+        const data = await response.json();
+        setIssue(data.data);
+      } catch (error) {
+        const response = await fetch("http://localhost:4000/auth/refresh", {
+          credentials: "include",
+        });
+        const token = await response.json();
+        localStorage.setItem("token", token.token);
+      }
+    }
+    fetchApi();
   }, []);
 
   const deleteIssue = (id: number) => {

@@ -12,4 +12,12 @@ authRoutes.post("/magic-link", authControl.magicLinkRequest);
 
 authRoutes.get("/magic-link/verify", authControl.magicLinkVerify);
 
+authRoutes.post("/refresh", authControl.refreshController);
+
+authRoutes.post("/forgot", authControl.forgotController);
+
+authRoutes.patch("/reset", authControl.resetController);
+
+authRoutes.get("/reset", authControl.resetGetController);
+
 authRoutes.get("/me", authentication, authControl.meController);

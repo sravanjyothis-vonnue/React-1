@@ -4,9 +4,12 @@ import {
   loginCreds,
   magicLink,
   registerCreds,
+  resetLink,
+  setPasswordCred,
   type loginSchema,
   type magicLinkSchema,
   type registerSchema,
+  type setPasswordSchema,
 } from "./auth.schema.ts";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -15,7 +18,7 @@ import { redis } from "../../config/redisConfig.ts";
 import crypto from "crypto";
 import { sendMail } from "../../utils/mails.ts";
 
-const key = process.env.JWT_SECRET || "secrect_key";
+const key = process.env.JWT_SECRET || "secret_key";
 
 export async function login(body: loginSchema) {
   const result = loginCreds.safeParse(body);
@@ -34,8 +37,9 @@ export async function login(body: loginSchema) {
   const token = jwt.sign({ userId: user.id, role: user.role }, key, {
     expiresIn: "1h",
   });
+  const userId = user.id;
 
-  return token;
+  return { token, userId };
 }
 
 export async function register(body: registerSchema) {
@@ -102,4 +106,58 @@ export async function signInwithLink(token: string) {
     expiresIn: "1h",
   });
   return jwtToken;
+}
+
+export async function refreshAccessToken(userId: string) {
+  const user = await repository.findUserWithId(userId);
+
+  if (!user) throw new Error("User not found");
+
+  return jwt.sign({ userId: user.id, role: user.role }, key, {
+    expiresIn: "15m",
+  });
+}
+
+export async function resetPassword(email: string) {
+  const TTL_PASSWORD_LINK = 15 * 60;
+  const result = resetLink.safeParse(email);
+  if (!result.success) {
+    throw new Error("Validation error");
+  }
+  const user = await repository.findUser(result.data.email);
+  if (!user) {
+    throw new Error("user not found");
+  }
+
+  const raw = crypto.randomBytes(64).toString("hex");
+  const hashedString = hashedToken(raw);
+
+  await redis.set(`reset:${hashedString}`, user.id, "EX", TTL_PASSWORD_LINK);
+
+  const link = `${process.env.APP_URL}/auth/reset?${raw}`;
+
+  sendMail({
+    to: result.data.email,
+    subject: "Password Reset Link",
+    html: `<p>Here is your link to reset Password</p> : ${link}`,
+  });
+  return;
+}
+
+export async function setNewPassword(data: setPasswordSchema) {
+  const result = setPasswordCred.safeParse(data);
+  if (!result.success) {
+    throw new Error("validation error");
+  }
+  const isValid = await redis.get(`reset:${result.data.token}`);
+  if (!isValid) {
+    throw new Error("Invalid or Expired token");
+  }
+  const user = await repository.findUserWithId(isValid);
+  if (!user) {
+    throw new Error("User not found");
+  }
+  const hashedPassword = bcrypt.hashSync(result.data.password, 10);
+  await repository.changePassword(hashedPassword, isValid);
+  return;
 }
