@@ -7,6 +7,7 @@ import { Login } from "./components/login";
 import { Profile } from "./components/profile";
 import { ViewIssue } from "./components/viewIssue";
 import { Not_Found } from "./components/notFound";
+import { Reset } from "./components/reset";
 import { Authenticate } from "./constext/authContext";
 import { ProtectedRoute } from "./constext/protectedRoute";
 
@@ -23,6 +24,7 @@ function App() {
     <Authenticate>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/reset" element={<Reset />} />
         <Route element={<DataLayout />}>
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Shell />} />

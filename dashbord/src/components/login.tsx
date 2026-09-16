@@ -5,7 +5,18 @@ export function Login() {
   const { login, success } = useAuth();
 
   async function handleOnSubmit(data: FormData) {
-    await login(data);
+    login(data);
+  }
+
+  async function handleForgot(data: string) {
+    fetch("https://8t6gkm38-4000.inc1.devtunnels.ms/auth/forgot", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: data,
+      }),
+    });
   }
 
   return (
@@ -26,6 +37,7 @@ export function Login() {
               className="formInput"
               style={{ borderColor: "whitesmoke" }}
               name="username"
+              id="username"
             />
             <p className="errorDisplay"></p>
             <label htmlFor="password" id="password">
@@ -35,6 +47,7 @@ export function Login() {
               type="password"
               className="formInput"
               style={{ borderColor: "whitesmoke" }}
+              id="password"
               name="password"
             />
             <p className="errorDisplay"></p>
@@ -51,6 +64,18 @@ export function Login() {
               }}
             >
               Login
+            </button>
+            <button
+              className="formButton"
+              id="forgotButton"
+              onClick={() => {
+                const username = document.getElementById(
+                  "username",
+                ) as HTMLInputElement;
+                handleForgot(username.value);
+              }}
+            >
+              forgot password
             </button>
           </form>
         </div>

@@ -2,6 +2,7 @@ import type { NextFunction, Request, Response } from "express";
 import { Prisma } from "../generated/prisma/client.ts";
 import z, { ZodError } from "zod";
 import jwt from "jsonwebtoken";
+import { BadRequestError } from "../utils/errors.ts";
 const { JsonWebTokenError } = jwt;
 
 export function errorHandler(
@@ -10,6 +11,16 @@ export function errorHandler(
   res: Response,
   next: NextFunction,
 ) {
+  if (err instanceof BadRequestError) {
+    res.status(400).json({
+      error: {
+        message: err.message,
+        name: err.name,
+      },
+    });
+    return;
+  }
+
   if (err instanceof ZodError) {
     res.status(400).json({
       error: {
@@ -27,6 +38,7 @@ export function errorHandler(
         code: "UNAUTHORIZED",
       },
     });
+    return;
   }
 
   if (err instanceof Prisma.PrismaClientKnownRequestError) {

@@ -88,7 +88,6 @@ class auth {
         path: "/auth/refresh",
         maxAge: 24 * 60 * 60 * 1000,
       });
-      console.log(newToken);
 
       res.status(200).json({
         message: "token refreshed",
@@ -117,23 +116,17 @@ class auth {
   }
 
   async resetGetController(req: Request, res: Response, next: NextFunction) {
-    const token = req.query.token;
+    const token = req.query.reset;
     if (!token) {
       throw new Error("Token not found");
     }
-    res.redirect(
-      `https://preeminent-taffy-564d2c.netlify.app/reset/?token=${token}`,
-    );
-    res.status(201).json({
-      message: "redirected",
-    });
+    res.redirect(`http://localhost:5173/reset/?token=${token}`);
   }
 
   async resetController(req: Request, res: Response, next: NextFunction) {
     await setNewPassword(req.body);
-    res.redirect(`https://preeminent-taffy-564d2c.netlify.app/`);
     res.status(201).json({
-      message: "Password changed successfully",
+      message: "password reset",
     });
   }
 }
