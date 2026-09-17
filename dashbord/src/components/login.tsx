@@ -1,7 +1,9 @@
 import { LoginHeader } from "./loginHeader";
 import { useAuth } from "../constext/authContext";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
+  const navigate = useNavigate();
   const { login, success } = useAuth();
 
   async function handleOnSubmit(data: FormData) {
@@ -64,6 +66,15 @@ export function Login() {
               }}
             >
               Login
+            </button>
+            <button
+              style={{ width: 258, marginTop: 10 }}
+              className="signUpButton"
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              Sign Up
             </button>
             <button
               className="formButton"

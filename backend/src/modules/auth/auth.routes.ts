@@ -20,4 +20,8 @@ authRoutes.patch("/reset", authControl.resetController);
 
 authRoutes.get("/reset", authControl.resetGetController);
 
+authRoutes.get("/google", authControl.googleAuthController);
+
+authRoutes.get("google/callback", authControl.googleCallback);
+
 authRoutes.get("/me", authentication, authControl.meController);

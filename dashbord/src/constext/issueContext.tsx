@@ -26,7 +26,7 @@ interface IssueContextType {
 const IssueContext = createContext<IssueContextType | null>(null);
 
 export function Datafetch({ children }: { children: ReactNode }) {
-  const { user } = useAuth();
+  const { user, token, setToken } = useAuth();
   const [issue, setIssue] = useState<Issue[]>([]);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export function Datafetch({ children }: { children: ReactNode }) {
           "https://8t6gkm38-4000.inc1.devtunnels.ms/api/issues",
           {
             headers: {
-              Authorization: `Barear ${localStorage.getItem("token")}`,
+              Authorization: `Barear ${token}`,
             },
           },
         );
@@ -51,8 +51,8 @@ export function Datafetch({ children }: { children: ReactNode }) {
         const response = await fetch("http://localhost:4000/auth/refresh", {
           credentials: "include",
         });
-        const token = await response.json();
-        localStorage.setItem("token", token.token);
+        const newToken = await response.json();
+        setToken(newToken);
       }
     }
     fetchApi();

@@ -18,9 +18,11 @@ type loginCred = z.infer<typeof loginForm>;
 interface AuthContextType {
   login: (data: FormData) => void;
   logout: () => void;
+  setToken: Function;
   success: any;
   user: any;
   me: any;
+  token: any;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -30,10 +32,12 @@ export function Authenticate({ children }: { children: ReactNode }) {
   const [user, setUser] = useState(false);
   const [success, setSuccess] = useState(true);
   const [me, setme] = useState(null);
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     fetch("https://8t6gkm38-4000.inc1.devtunnels.ms/auth/me", {
       credentials: "include",
+      headers: { Authorization: `Barear ${token}` },
     })
       .then((res) => (res.ok ? res.json() : null))
       .then((json) => {
@@ -78,7 +82,7 @@ export function Authenticate({ children }: { children: ReactNode }) {
           setSuccess(false);
           throw new Error(`UNAUTHORIZED : ${data.error}`);
         }
-        localStorage.setItem("token", data.token);
+        setToken(data.token);
         setUser(true);
         navigate("/dashboard");
         return;
@@ -91,7 +95,7 @@ export function Authenticate({ children }: { children: ReactNode }) {
       const token = params.get("token");
       if (token) {
         setUser(true);
-        localStorage.setItem("token", token);
+        setToken(token);
         navigate("/dashboard");
       } else {
         navigate("/");
@@ -102,10 +106,13 @@ export function Authenticate({ children }: { children: ReactNode }) {
   const logout = () => {
     setUser(false);
     setme(null);
+    setToken("");
   };
 
   return (
-    <AuthContext.Provider value={{ login, logout, user, success, me }}>
+    <AuthContext.Provider
+      value={{ login, logout, user, success, me, token, setToken }}
+    >
       {children}
     </AuthContext.Provider>
   );

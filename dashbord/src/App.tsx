@@ -10,6 +10,7 @@ import { Not_Found } from "./components/notFound";
 import { Reset } from "./components/reset";
 import { Authenticate } from "./constext/authContext";
 import { ProtectedRoute } from "./constext/protectedRoute";
+import { SignUp } from "./components/signup";
 
 function DataLayout() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/reset" element={<Reset />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route element={<DataLayout />}>
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Shell />} />

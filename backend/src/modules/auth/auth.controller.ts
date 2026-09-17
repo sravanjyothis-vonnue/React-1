@@ -12,6 +12,8 @@ import {
   issueRefreshToken,
   rotateRefreshToken,
 } from "../../utils/refreshTokens.ts";
+import { string } from "zod";
+import { BadRequestError } from "../../utils/errors.ts";
 
 class auth {
   async loginController(req: Request, res: Response, next: NextFunction) {
@@ -24,6 +26,7 @@ class auth {
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      path: "/auth/refresh",
       partitioned: true,
     });
     res.status(200).json({
@@ -63,6 +66,7 @@ class auth {
       httpOnly: true,
       sameSite: "none",
       secure: true,
+      path: "/auth/refresh",
       maxAge: 60 * 60 * 1000,
     });
 
@@ -128,6 +132,32 @@ class auth {
     res.status(201).json({
       message: "password reset",
     });
+  }
+
+  async googleAuthController(req: Request, res: Response, next: NextFunction) {
+    const params = new URLSearchParams({
+      client_id: process.env.GOOGLE_CLIENT_ID!,
+      redirect_uri:
+        "https://8t6gkm38-4000.inc1.devtunnels.ms/auth/google/callback",
+      response_type: "code",
+      scope: "openid email profile",
+      access_type: "offline",
+      prompt: "consent",
+    });
+
+    res.redirect(
+      `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`,
+    );
+  }
+
+  async googleCallback(req: Request, res: Response, next: NextFunction) {
+    const { code } = req.query;
+
+    if (!code || code !== "string") {
+      throw new BadRequestError("Invalid query string");
+    }
+
+    res.redirect("http://localhost:5173/");
   }
 }
 

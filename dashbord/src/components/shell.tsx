@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 export function Shell() {
   const navigate = useNavigate();
   const { user } = useAuth();
+  console.log(user);
   const [search, setSearch] = useState<null | string>(null);
   useEffect(() => {
     if (!user) {

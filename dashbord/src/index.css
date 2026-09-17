@@ -337,11 +337,20 @@ img {
   margin-left: 30px;
 }
 
+.userName,
+.password {
+  background: transparent;
+  border: 1px solid white;
+  height: 40px;
+  border-radius: 5px;
+}
+
 .formInput:focus {
   color: whitesmoke;
 }
 
-.formButton {
+.formButton,
+.signUpButton {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -14,13 +14,13 @@ interface dataSchema {
 [];
 
 export function ProjectSection({ onSelected, search }: any) {
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const [data, setData] = useState([]);
   useEffect(() => {
     if (!user) return;
     fetch("https://8t6gkm38-4000.inc1.devtunnels.ms/api/projects", {
       credentials: "include",
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => (res.ok ? res.json() : null))
       .then((json) => setData(json.data))

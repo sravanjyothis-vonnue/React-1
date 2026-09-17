@@ -60,7 +60,6 @@ export function ModalOverlay({ open, setOpen }: any) {
       priority: result.data.priority,
       status: "Pending",
     };
-    createIssue(data);
     try {
       const response = await fetch("http://localhost:4000/api/issues", {
         method: "POST",
@@ -72,6 +71,7 @@ export function ModalOverlay({ open, setOpen }: any) {
       if (!response.ok) {
         throw new Error("Faild to create data");
       }
+      createIssue(data);
     } catch (error) {
       console.error(error);
       return;
