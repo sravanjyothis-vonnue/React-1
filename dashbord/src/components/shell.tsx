@@ -1,6 +1,6 @@
-import { useAuth } from "../constext/authContext.tsx";
+import { useAuth } from "../context/authContext.tsx";
 import { Content } from "./body.tsx";
-import { Header } from "./header.tsx";
+import Header from "./header";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

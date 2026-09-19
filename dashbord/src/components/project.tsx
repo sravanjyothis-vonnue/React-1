@@ -1,7 +1,7 @@
 import { ProjectCard } from "./projectCard";
 import { MarqueeRow } from "./marque.tsx";
 import { useEffect, useState } from "react";
-import { useAuth } from "../constext/authContext.tsx";
+import { useAuth } from "../context/authContext.tsx";
 
 interface dataSchema {
   projectId: number;

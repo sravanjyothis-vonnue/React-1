@@ -1,5 +1,5 @@
 import image from "../assets/gift-habeshaw-qJT4x-PgKq0-unsplash.jpg";
-import { Avatar } from "./avatar";
+import Avatar from "./avatar";
 import { Navbar } from "./navbar";
 export function Profile() {
   return (

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useIssues } from "../constext/issueContext";
+import { useIssues } from "../context/issueContext";
 import { Filter } from "./filter";
 import { TaskCard } from "./taskCard";
 import { ModalOverlay } from "./modal";

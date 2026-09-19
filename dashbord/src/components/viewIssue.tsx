@@ -1,7 +1,7 @@
-import { Header } from "./header";
+import Header from "./header";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useIssues } from "../constext/issueContext";
+import { useIssues } from "../context/issueContext";
 
 export function ViewIssue() {
   const navigate = useNavigate();

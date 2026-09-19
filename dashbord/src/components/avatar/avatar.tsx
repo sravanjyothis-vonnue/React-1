@@ -1,7 +1,7 @@
-import userIcon from "../assets/user-svgrepo-com.svg";
+import userIcon from "../../assets/user-svgrepo-com.svg";
 import { useNavigate } from "react-router-dom";
 
-export function Avatar() {
+export default function Avatar() {
   const navigate = useNavigate();
   return (
     <div

@@ -1,7 +1,7 @@
 import { Box, Modal } from "@mui/material";
 import { taskSchema } from "./taskSchema";
 import { toast } from "sonner";
-import { useIssues } from "../constext/issueContext";
+import { useIssues } from "../context/issueContext";
 
 export function ModalOverlay({ open, setOpen }: any) {
   const { createIssue } = useIssues();

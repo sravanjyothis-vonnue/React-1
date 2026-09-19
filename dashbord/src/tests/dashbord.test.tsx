@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { vi } from "vitest";
 import { Login } from "../components/login.tsx";
-import { useAuth } from "../constext/authContext.tsx";
+import { useAuth } from "../context/authContext.tsx";
 import { ProjectSection } from "../components/project.tsx";
 import { IssueSection } from "../components/issuesSection.tsx";
-import { useIssues } from "../constext/issueContext.tsx";
+import { useIssues } from "../context/issueContext.tsx";
 import { ModalOverlay } from "../components/modal.tsx";
 import * as CardModule from "../components/taskCard.tsx";
 import { MemoryRouter } from "react-router-dom";

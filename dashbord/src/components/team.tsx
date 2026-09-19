@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Header } from "./header.tsx";
+import Header from "./header";
 import { MemberSection } from "./memberSection.tsx";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../constext/authContext.tsx";
+import { useAuth } from "../context/authContext.tsx";
 import { useEffect } from "react";
 
 export function Team() {

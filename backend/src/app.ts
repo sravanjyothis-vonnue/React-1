@@ -20,6 +20,7 @@ httpServer.use(
     origin: [
       "https://preeminent-taffy-564d2c.netlify.app",
       "http://localhost:5173",
+      "https://accounts.google.com",
     ],
     credentials: true,
   }),

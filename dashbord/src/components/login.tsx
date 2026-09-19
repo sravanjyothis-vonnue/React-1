@@ -1,5 +1,5 @@
 import { LoginHeader } from "./loginHeader";
-import { useAuth } from "../constext/authContext";
+import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
 
 export function Login() {
@@ -8,6 +8,15 @@ export function Login() {
 
   async function handleOnSubmit(data: FormData) {
     login(data);
+  }
+
+  async function handleMagicLink() {
+    navigate("/Magiclink");
+  }
+
+  async function handleGoogleLogin() {
+    window.location.href =
+      "https://8t6gkm38-4000.inc1.devtunnels.ms/auth/google";
   }
 
   async function handleForgot(data: string) {
@@ -90,6 +99,14 @@ export function Login() {
             </button>
           </form>
         </div>
+      </div>
+      <div className="otherLogin">
+        <button className="magiclinkButton" onClick={handleMagicLink}>
+          Login with MagicLink
+        </button>
+        <button className="googleButton" onClick={handleGoogleLogin}>
+          Login with Google
+        </button>
       </div>
     </div>
   );
